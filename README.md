@@ -1,169 +1,151 @@
-| <center><img src="./assets/rakstar.jpg" alt="RAKstar" width=25%></center>  | ![RAKWireless](./assets/RAK-Whirls.png) | [![Build Status](https://github.com/RAKWireless/RAK13600-PN532/workflows/RAK%20Library%20Build%20CI/badge.svg)](https://github.com/RAKWireless/RAK13600-PN532/actions) |
-| -- | -- | -- |
+| <center><img src="./assets/rakstar.jpg" alt="RAKstar" width=25%></center> | ![RAKWireless](./assets/RAK-Whirls.png) | [![Build Status](https://github.com/RAKWireless/RAKwireless_ADC_SGM58031_library/workflows/RAK%20Library%20Build%20CI/badge.svg)](https://github.com/RAKWireless/RAKwireless_ADC_SGM58031_library/actions) |
+| ------------------------------------------------------------ | --------------------------------------- | ------------------------------------------------------------ |
 
-# RAK12034
+# RAKwireless_ADC_SGM58031_library
 
-The BMX160 is a highly integrated, low power 9-axis sensor that provides precise acceleration and angular rate (gyroscopic) and geomagnetic measurement in each spatial direction.<br>
-The BMX160 contains 16 bit digtial,triaxial accelerometer 16 bit digital, triaxial gyroscope and geomagnetic sensor.<br>
-This library provides basic support for configuring functions and reading data.
+Simple Arduino Library for the WisBlock I2C ADC Sensor version from [RAKwireless].
 
-[*RAKwireless RAK13600 RFID reader*](https://store.rakwireless.com/products/rfid-module-rak13600)
+[RAKwireless RAK12023/RAK12035 Soil Moisture Sensor](https://store.rakwireless.com/products/soil-moisture-sensor-rak12023)
 
 # Documentation
 
-* **[Product Repository](https://github.com/RAKWireless/RAK13600-PN532)** - Product repository for the RAKWireless RAK12034 module.
-* **[Documentation](https://docs.rakwireless.com/Product-Categories/WisBlock/RAK13600/Overview/)** - Documentation and Quick Start Guide for the RAK12034 module.
+* **[Product Repository](https://github.com/RAKWireless/RAKwireless_ADC_SGM58031_library)** - Product repository for the RAKwireless_ADC_SGM58031_library.
+* **[Documentation](https://docs.rakwireless.com/Product-Categories/WisBlock/RAKwireless_ADC_SGM58031_library/Overview/)** - Documentation and Quick Start Guide for the RAKwireless_ADC_SGM58031_library.
 
 # Installation
 
-In Arduino IDE, open Sketch->Include Library->Manage Libraries then search for RAK12034 .
+In Arduino IDE open Sketch->Include Library->Manage Libraries then search for RAKwireless_ADC_SGM58031_library.    
 
-In PlatformIO open PlatformIO Home, switch to libraries and search for RAK12034 .
-Or install the library project dependencies by adding:
+In PlatformIO open PlatformIO Home, switch to libraries and search for RAKwireless_ADC_SGM58031_library. 
+Or install the library project depend by adding 
 
 ```log
-lib_deps = rakwireless/RAK12034-BMX160 library
+lib_deps =
+  rakwireless/RAKwireless_ADC_SGM58031_library
 ```
-
 into **`platformio.ini`**
 
-For manual installation, download the archive, unzip it and place the RAK12034-BMX160 folder into the library directory.
-In Arduino IDE this is usually <arduinosketchfolder>/libraries/
-In PlatformIO this is usually <user/.platformio/lib>
+For manual installation download the archive, unzip it and place the RAKwireless_ADC_SGM58031_library folder into the library directory.    
+In Arduino IDE this is usually <arduinosketchfolder>/libraries/    
+In PlatformIO this is usually <user/.platformio/lib>     
+
 
 # Usage
 
-The library provides an BMX160 class that allows you to communicate with BMX160 and get the chip data. Check out the examples how to get the chip data.
+The library provides an interface class, which allows communication to the RAKwireless_ADC_SGM58031_library over I2C. 
+- [RAK_SGM58031](./examples/RAK_SGM58031) simply reads the voltage values and prints them over USB Serial
 
 ## This class provides the following methods:
-**`bool begin();`**    
-Set the i2c addr and init the i2c.
-Parameters:
 
-| Direction | Name | Function |
-| --------- | ---- | :------- |
-| return    |          | true Initialization succeeded,false Initialization failed |
-
-**` void readReg(uint8_t reg, uint8_t *pBuf, uint16_t len);`**    
-Get the sensor IIC data.
-Parameters:
-
-| Direction | Name | Function                             |
-| --------- | ---- | ------------------------------------ |
-| in        | reg  | reg register                         |
-| out       | pBuf | get the store and buffer of the data |
-| in        | len  | len data length to be readed         |
-| return    |      | none                                 |
-
-**` void writeReg(uint8_t reg, uint8_t *pBuf, uint16_t len);`**    
-write the sensor IIC data.
-Parameters:
-
-| Direction | Name | Function                               |
-| --------- | ---- | -------------------------------------- |
-| in        | reg  | reg register                           |
-| in        | pBuf | write the store and buffer of the data |
-| in        | len  | len data length to be readed           |
-| return    |      | none                                   |
-
-**` void writeBmxReg(uint8_t reg, uint8_t value);`**    
-Write data to the BMX register.
-Parameters:
-
-| Direction | Name  | Function                         |
-| --------- | ----- | -------------------------------- |
-| in        | reg   | reg register                     |
-| in        | value | data written to the BMX register |
-| return    |       | none                             |
-
-**`void setGyroRange(eGyroRange_t bits);`**    
-Set gyroscope angular rate range and resolution.
-Parameters:
-
-| Direction | Name | Function                                        |
-| --------- | ---- | ----------------------------------------------- |
-| in        | bits | set gyroscope angular rate range and resolution |
-| return    |      | none                                            |
-
-**`void setAccelRange(eAccelRange_t bits);`**    
-Allow the selection of the accelerometer g-range.
-Parameters:
+**`RAK_ADC_SGM58031()`**    
+Create the interface object using hardware IIC  
+Parameters:    
 
 | Direction | Name | Function |
 | --------- | ---- | -------- |
-| in | bits | set the accelerometer g-range |
-| return | | none |
+|  return |  | none  |
 
-**` void getAllData( sBmx160SensorData_t *magn,  sBmx160SensorData_t *gyro,  sBmx160SensorData_t *accel);`**    
-Get the magn, gyro and accel data 
-Parameters:
-
-| Direction | Name | Function |
-| --------- | ---- | -------- |
-| in        | magn  | to store the magn data  |
-| in | gyro | to store the gyro data |
-| in | accel | to store the accel data |
-| return | | none |
-
-**`bool softReset();`**     
-Reset bmx160 hardware.
-Parameters:
+**` uint16_t getChipID()`**    
+Gets the chip ID.          
+Parameters:    
 
 | Direction | Name | Function |
 | --------- | ---- | -------- |
-| return |  | true reset succeeded, false reset  failed |
+| return    |   | the chip Id |
 
-**`void setLowPower();`**    
-Disabled the the magn, gyro sensor to reduce power consumption.
-Parameters:
-
-| Direction | Name | Function |
-| --------- | ---- | -------- |
-| return    |         | none |
-
-**`void wakeUp();`**     
-Enabled the the magn, gyro sensor.
-Parameters:
+**`void setAlertLowThreshold(uint16_t threshold)`**    
+Sets the lower limit threshold used to determine the alert condition         
+Parameters:    
 
 | Direction | Name | Function |
 | --------- | ---- | -------- |
-| return    |      | none     |
+| in          | threshold | the lower limit threshold |
 
-**` int32_t getTemperature(float *temp);`**    
-Get BMX160 Temperature.
-Parameters:
+**`uint16_t readAlertLowThreshold()`**      
+Read the lower limit threshold value  
+Parameters:    
 
-| Direction | Name | Function               |
-| --------- | ---- | ---------------------- |
-| out       | temp | get BMX160 Temperature |
-| return    |      | none                   |
+| Direction | Name | Function |
+| --------- | ---- | -------- |
+| return      |      |the lower limit threshold value|
 
-**`void InterruptConfig(uint8_t interrupt_enable, uint8_t interrupt_high_th);`**    
-Set BMX160 Interrupt.
-Parameters:
+**`void setAlertHighThreshold(uint16_t threshold)`**    
+Sets the upper limit threshold used to determine the alert condition
+Parameters:    
 
-| Direction | Name              | Function                        |
-| --------- | ----------------- | ------------------------------- |
-| in        | interrupt_enable  | enable HIGH_G_Interrupt         |
-| in        | interrupt_high_th | set the accelerometer threshold |
-| return    |                   | none                            |
+| Direction | Name | Function |
+| --------- | ---- | -------- |
+| in          | threshold | the upper limit threshold |
 
-**`void ODR_Config(uint8_t accelCfg_odr, uint8_t gyroCfg_odr);`**    
-Set BMX160 Output data rate.
-Parameters:
+**`uint16_t readAlertHighThreshold()`**    
+ Read the upper limit threshold value
+Parameters:    
 
-| Direction | Name         | Function                           |
-| --------- | ------------ | ---------------------------------- |
-| in        | accelCfg_odr | set accelerometer output data rate |
-| in        | gyroCfg_odr  | set  gyroscope output data rate    |
-| return    |              | none                               |
+| Direction | Name | Function |
+| --------- | ---- | -------- |
+| return      |      |the upper limit threshold value|
 
-**`void get_ORD_Config(float *accelCfg_odr, float *gyroCfg_odr);`**    
-Get BMX160 Output data rate.
-Parameters:
+**`void setConfig(uint16_t data)`**    
 
-| Direction | Name         | Function                           |
-| --------- | ------------ | ---------------------------------- |
-| out       | accelCfg_odr | get accelerometer output data rate |
-| out       | gyroCfg_odr  | get gyroscope output data rate     |
-| return    |              | none                               |
+set the 16-bit register can be used to control the SGM58031 operating mode, input selection, data rate, PGA settings and comparator modes
+
+Parameters:    
+
+| Direction | Name | Function |
+| --------- | ---- | -------- |
+| in          | data | the config data |
+| return      | none |none|
+
+**` uint16_t getConfig()`**    
+Gets the value of config Register
+Parameters:    
+
+| Direction | Name | Function |
+| --------- | ---- | -------- |
+| return      |      |the value of config Register|
+
+**`void set_GN_Trim1(uint16_t data)`**    
+ADC gain coefficient for user selecting Config1 register EXT_REF bit as reference    
+Parameters:    
+
+| Direction | Name | Function |
+| --------- | ---- | -------- |
+| in    | data |the GN_Trim1 data|
+
+**`uint16_t get_GN_Trim1()`**    
+Gets the value of GN_Trim1 Register  
+Parameters:    
+
+| Direction | Name | Function |
+| --------- | ---- | -------- |
+| return      |  |the value of GN_Trim1 Register|
+
+**` void setVoltageResolution(float value)`**    
+ Set the resolution voltage 
+Parameters:    
+
+| Direction | Name | Function |
+| --------- | ---- | -------- |
+| in    | value |the resolution voltage value|
+
+**`float getVoltageResolution()`**    
+get the resolution voltage 
+Parameters:    
+
+| Direction | Name | Function |
+| --------- | ---- | -------- |
+| return      |  |the resolution voltage|
+
+**`float getVoltage()`**    
+Read the voltage of sensor output  
+Parameters:    
+
+| Direction | Name | Function |
+| --------- | ---- | -------- |
+| return      |  |Voltage value after conversion|
+
+## Version History
+
+### v1.0.0
+- Initial Release
+

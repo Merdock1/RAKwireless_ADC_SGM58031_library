@@ -6,7 +6,7 @@
 		"SGM58031",
 		"RAKWireless",
 		"WisBlock",
-		"RAK12034"
+		"RAK12059"
 	],
 	"description": "RAKWireless library for ADC",
 	"frameworks": [
