@@ -2,7 +2,7 @@
    @file ADC_SGM58031.h
    @author rakwireless.com
    @brief This code is designed to config SGM58031 ADC device and handle the data
-   @version 1.0
+   @version 1.0.1
    @date 2022-01-19
 
    @copyright Copyright (c) 2022
@@ -29,6 +29,16 @@
 #define SGM58031_CHIP_ID_REGISTER (0x05)
 #define SGM58031_GN_TRIM1_REGISTER (0x06)
 
+//PGA
+#define SGM58031_FS_6_144   6.144 
+#define SGM58031_FS_4_096   4.096
+#define SGM58031_FS_2_048   2.048
+#define SGM58031_FS_1_024   1.024
+#define SGM58031_FS_0_512   0.512
+#define SGM58031_FS_0_256   0.256
+
+#define DEVICE_ID 0x0080
+
 class RAK_ADC_SGM58031
 {
 public:
@@ -36,6 +46,8 @@ public:
   RAK_ADC_SGM58031(TwoWire *w);
   RAK_ADC_SGM58031(int addr);
   RAK_ADC_SGM58031(TwoWire *w, int addr);
+  
+  void begin() ;
 
   uint8_t writeByteRegister(uint8_t reg, uint8_t data);
   uint8_t writeWordRegister(uint8_t reg, uint16_t data);

@@ -36,6 +36,14 @@ RAK_ADC_SGM58031::RAK_ADC_SGM58031(TwoWire *w, int addr)
   i2cAddress = addr;
 }
 
+
+/**
+   @brief i2c initialization
+ **/
+void RAK_ADC_SGM58031::begin() {
+  _wire->begin();
+}
+
 /**
    @brief Create the interface object using hardware IIC
  **/
@@ -123,7 +131,7 @@ float RAK_ADC_SGM58031::getVoltage()
 {
   float voltage;
   voltage = getAdcValue();
-  voltage = voltage * ReferenceVoltage / 65535.0; // calculate sensor voltage，ADC 16bit(0-65535)
+  voltage = voltage * ReferenceVoltage / 32767.0; 
   return voltage;
 }
 
