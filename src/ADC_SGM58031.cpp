@@ -2,7 +2,7 @@
    @file ADC_SGM58031.cpp
    @author rakwireless.com
    @brief This code is designed to config SGM58031 ADC device and handle the data
-   @version 1.0
+   @version 1.0.0
    @date 2022-01-19
    @copyright Copyright (c) 2022
 */

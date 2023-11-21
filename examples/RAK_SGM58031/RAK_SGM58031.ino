@@ -2,7 +2,7 @@
    @file RAK_SGM58031.ino
    @author rakwireless.com
    @brief This code can get the voltage data
-   @version 1.0
+   @version 1.0.0
    @date 2022-09-21
    @copyright Copyright (c) 2022
 */
@@ -14,7 +14,6 @@ RAK_ADC_SGM58031 sgm58031(SGM58031_SDA_ADDRESS);
 // RAK_ADC_SGM58031 sgm58031(Wire);
 // RAK_ADC_SGM58031 sgm58031(Wire,SGM58031_DEFAULT_ADDRESS);
 
-bool  interrupt_flag = false;
 void setup()
 {
   // put your setup code here, to run once:
@@ -39,7 +38,7 @@ void setup()
     }
   }
   sgm58031.begin();
-  Serial.println("RAK12059 TEST");
+  Serial.println("RAKwireless_ADC_SGM58031 TEST");
   if (sgm58031.getChipID() != DEVICE_ID)
   {
     Serial.println("No CHIP found ... please check your connection");
